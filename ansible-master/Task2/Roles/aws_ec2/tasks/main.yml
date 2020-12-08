@@ -1,0 +1,15 @@
+- name: "Configure EC2 instance in AWS."
+  ec2:
+    key_name: "{{ key }}"
+    instance_type: "{{ instance_type }}"
+    image: "{{ image_name }}"
+    wait: yes
+    count: "{{ instanceNum }}"
+    vpc_subnet_id: "{{ subnet_id }}"
+    assign_public_ip: yes
+    group_id: "{{ security_group }}"
+    region: "{{ region }}" 
+    aws_access_key: "{{ access_key }}" 
+    aws_secret_key: "{{ secret_key }}"
+- name: Refresh Inventory
+  meta: refresh_inventory

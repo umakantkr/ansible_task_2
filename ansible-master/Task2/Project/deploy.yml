@@ -1,0 +1,7 @@
+- hosts: localhost
+  roles:
+    - aws_ec2
+- hosts: ec2
+  roles:
+     - aws_httpd
+

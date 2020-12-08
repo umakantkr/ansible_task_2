@@ -1,0 +1,9 @@
+key: passcode
+instance_type: t2.micro
+image_name: ami-0ebc1ac48dfd14136
+instanceNum: 1
+subnet_id: subnet-fa0075b6
+security_group: sg-0e876941ef6fde568
+region: ap-south-1
+access_key: "*******************" 
+secret_key: "************************"

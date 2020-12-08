@@ -1,0 +1,25 @@
+- name: "Installing httpd in remote user interface"
+  package:
+     name: "httpd"
+     state: present
+  register: isInstall
+- name: "Creating directory for website"
+  file: 
+     state: directory
+     dest: "{{ destination }}"
+  register: folderCreated
+- name: "Copying .conf from local host to remote host"
+  template:
+     dest: /etc/httpd/conf.d/remote.conf
+     src: templates/localconf.conf.j2
+  when: isInstall.rc == 0
+  notify: "When there is change in .conf file we need to restart the service"
+- name: "Geting website into the folder /location"
+  get_url:
+     dest: "{{ destination }}"
+     url: "https://raw.githubusercontent.com/ashishworkspace/website/master/index.html"
+  when: folderCreated.failed == false
+- name: "Service Start"
+  service:
+     name: "httpd"
+     state: started 
